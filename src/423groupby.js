@@ -328,9 +328,16 @@ if(false) {
 							pre + 'if ((y=' + colexp + ") < g['" + colas + "']) g['" + colas + "'] = y;" + post
 						);
 					} else if (col.aggregatorid === 'MAX') {
-						return (
-							pre + 'if ((y=' + colexp + ") > g['" + colas + "']) g['" + colas + "'] = y;" + post
-						);
+						return `${pre} 
+									console.log(g['${colas}'])
+									y=${colexp};
+									g['${colas}'] = g['${colas}']??null;
+									if(!(null === y || typeof y === 'undefined' ||  typeof y === 'boolean')){
+										if(null === g['${colas}'] || y > g['${colas}']){
+											g['${colas}'] = y;
+										}	
+									} 
+								${post}`;
 					} else if (col.aggregatorid === 'FIRST') {
 						return '';
 					} else if (col.aggregatorid === 'LAST') {

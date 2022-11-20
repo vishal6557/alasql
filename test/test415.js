@@ -1,6 +1,6 @@
 if (typeof exports === 'object') {
 	var assert = require('assert');
-	var alasql = require('..');
+	var alasql = require('../dist/alasql.fs');
 }
 
 /*
@@ -115,5 +115,32 @@ describe('Test ' + test + ' Aggregators', function () {
 			{g: 4, l: 1},
 			{g: 5, l: 3},
 		]);
+	});
+
+	it('MAX dealing with null', function () {
+		var data = [
+			{a: null, b: 9, c: true, d: null},
+			{a: null, b: 1, c: false, d: 0},
+		];
+		res = alasql(
+			`SELECT 
+				MAX(a) AS a, 
+				MAX(b) as b, 
+				MAX(c) as c, 
+				MAX(d) as d,
+				max(1,9) as x	
+			FROM ?`,
+			[data]
+		);
+		assert.deepEqual(res, [{a: null, b: 9, c: null, d: 0, x: 9}]);
+	});
+
+	it('MIN dealing with null', function () {
+		var data = [
+			{a: null, b: 9},
+			{a: null, b: 1},
+		];
+		res = alasql('SELECT MIN(a) AS x, MIN(b) as y FROM ?', [data]);
+		assert.deepEqual(res, [{x: null, y: 1}]);
 	});
 });

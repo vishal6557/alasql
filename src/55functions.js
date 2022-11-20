@@ -193,19 +193,33 @@ stdlib.RTRIM = function (s) {
 };
 
 stdlib.MAX = stdlib.GREATEST = function () {
-	return (
-		'[' +
-		Array.prototype.join.call(arguments, ',') +
-		'].reduce(function (a, b) { return a > b ? a : b; })'
-	);
+	return `[null,${Array.prototype.join.call(
+		arguments,
+		','
+	)}].filter(x=>!(typeof x === 'undefined' ||  typeof x === 'boolean')).reduce((a, b)=>{
+			if(null === a){
+				return b;
+			}
+			if(null === b){
+				return a;
+			}
+			return a > b ? a : b; 
+		})`;
 };
 
 stdlib.MIN = stdlib.LEAST = function () {
-	return (
-		'[' +
-		Array.prototype.join.call(arguments, ',') +
-		'].reduce(function (a, b) { return a < b ? a : b; })'
-	);
+	return `[null,${Array.prototype.join.call(
+		arguments,
+		','
+	)}].filter(x=>!(typeof x === 'undefined' ||  typeof x === 'boolean')).reduce((a, b)=>{
+			if(null === a){
+				return b;
+			}
+			if(null === b){
+				return a;
+			}
+			return a < b ? a : b; 
+		})`;
 };
 
 stdlib.SUBSTRING =

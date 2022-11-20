@@ -130,6 +130,7 @@ yy.Select.prototype.toString = function () {
 	if (this.intersect) {
 		s += ' INTERSECT ' + (this.corresponding ? 'CORRESPONDING ' : '') + this.intersect.toString();
 	}
+	debugger;
 	return s;
 };
 
