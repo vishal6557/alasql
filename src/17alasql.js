@@ -64,7 +64,8 @@ alasql.options.logtarget = 'output'; // target for log. Values: 'console', 'outp
 alasql.options.logprompt = true; // Print SQL at log
 
 alasql.options.progress = false; // Callback for async queries progress
-alasql.options.nowdateseparator = '-'; // Separator for Now() function
+alasql.options.nowdateseparator = '-'; // Date separator for Now() function
+alasql.options.nowtimeseparator = ' '; //'T'; // date-time Separator for Now() function
 
 // Default modifier
 // values: RECORDSET, VALUE, ROW, COLUMN, MATRIX, TEXTSTRING, INDEX
