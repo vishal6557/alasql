@@ -83,7 +83,6 @@ describe('Test ' + test + ' - use NOW() function', function () {
 			'2022-01-20T08:30:00.123Z'
 		);
 
-
 		/*
 		Hmmm. How best to test that this gets converted correclty to locala time (including DST)?
 		"2022.01.10 04:10",
